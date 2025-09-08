@@ -72,13 +72,13 @@ function renderCart() {
             <div class="cart-actions">
             <button class='cartIncrease-btn' data-id='${
               product.id
-            }'><img src="/images/mas.png" alt="Sumar unidad" width='10' height='10' /></button>
+            }'><img src="./images/mas.png" alt="Sumar unidad" width='10' height='10' /></button>
             <button class="cartDecrease-btn" data-id='${
               product.id
-            }'><img src="/images/menos.png" alt="Restar unidad" width='10' height='10' /></button>
+            }'><img src="./images/menos.png" alt="Restar unidad" width='10' height='10' /></button>
             <button class="cartRemove-btn" data-id='${
               product.id
-            }'><img src="/images/cruz.png" alt="Cancelar artículo" width='10' height='10' /></button>
+            }'><img src="./images/cruz.png" alt="Cancelar artículo" width='10' height='10' /></button>
                 </div>
                 </article>
                 `;
