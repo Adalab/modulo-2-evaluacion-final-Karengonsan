@@ -5,7 +5,6 @@ console.log(">> Ready... go! :)");
 let products = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-
 const form = document.querySelector(".search-form");
 const inputSearch = document.querySelector(".search-input");
 const cartList = document.querySelector(".cart-list");
@@ -20,15 +19,14 @@ function renderResults(productsToShow) {
 
   for (const product of productsToShow) {
     const image = product.image || "https://placehold.co/600x400";
-
     const isInCart = cart.find((item) => item.id === product.id);
 
     const li = document.createElement("li");
     li.innerHTML = `
             <article>
                 <img src='${image}' alt='${
-                product.title
-                }' width='150' height='200'/>
+      product.title
+    }' width='150' height='200'/>
                 <div class= "product-info">
                 <h3>${product.title}</h3>
                 <p>${product.price} €</p>
@@ -99,12 +97,10 @@ function renderCart() {
     { selector: ".cartRemove-btn", handler: handleRemoveFromCart },
   ];
 
-  for (const config of buttonConfigs) {
+  buttonConfigs.forEach((config) => {
     const buttons = document.querySelectorAll(config.selector);
-    for (const btn of buttons) {
-      btn.addEventListener("click", config.handler);
-    }
-  }
+    buttons.forEach((btn) => btn.addEventListener("click", config.handler));
+  });
 }
 
 function handleCartToggle(event) {
@@ -126,9 +122,7 @@ function handleCartToggle(event) {
 function handleIncreaseQuantity(event) {
   const clickedId = parseInt(event.currentTarget.dataset.id);
   const productInCart = cart.find((item) => item.id === clickedId);
-  if (productInCart) {
-    productInCart.quantity++;
-  }
+  if (productInCart) productInCart.quantity++;
   localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
 }
@@ -138,24 +132,17 @@ function handleDecreaseQuantity(event) {
   const productInCart = cart.find((item) => item.id === clickedId);
   if (productInCart) {
     productInCart.quantity--;
-    if (productInCart.quantity <= 0) {
-      cart = cart.filter((item) => item.id !== clickedId);
-
-      renderResults(products);
-    }
+    if (productInCart.quantity <= 0) cart = cart.filter(item => item.id !== clickedId);
   }
   localStorage.setItem("cart", JSON.stringify(cart));
+  renderResults(products);
   renderCart();
 }
 
 function handleRemoveFromCart(event) {
   const clickedId = parseInt(event.currentTarget.dataset.id);
-
-  const indexInCart = cart.findIndex((item) => item.id === clickedId);
-
   cart = cart.filter((item) => item.id !== clickedId);
   localStorage.setItem("cart", JSON.stringify(cart));
-
   renderResults(products);
   renderCart();
 }
@@ -177,10 +164,7 @@ function getData() {
     })
     .catch((error) => {
       console.error("Error con la API principal, usando la de backup", error);
-
-      fetch(
-        "https://raw.githubusercontent.com/Adalab/resources/master/apis/products.json"
-      )
+      fetch("https://raw.githubusercontent.com/Adalab/resources/master/apis/products.json")
         .then((response) => response.json())
         .then((data) => {
           products = data;
@@ -195,11 +179,7 @@ clearCartBtn.addEventListener("click", handleClearCart);
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const searchValue = inputSearch.value.toLowerCase();
-
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchValue)
-  );
-
+  const filteredProducts = products.filter(product => product.title.toLowerCase().includes(searchValue));
   renderResults(filteredProducts);
 });
 
