@@ -5,7 +5,6 @@ console.log(">> Ready... go! :)");
 let products = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-renderCart();
 
 const form = document.querySelector(".search-form");
 const inputSearch = document.querySelector(".search-input");
