@@ -3,7 +3,7 @@
 console.log(">> Ready... go! :)");
 
 let products = [];
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const form = document.querySelector(".search-form");
 const inputSearch = document.querySelector(".search-input");
