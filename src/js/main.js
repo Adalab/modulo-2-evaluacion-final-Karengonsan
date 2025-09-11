@@ -12,6 +12,8 @@ const resultList = document.querySelector(".products-list");
 const cartTotal = document.querySelector(".cart-total");
 const clearCartBtn = document.querySelector(".clearCart-btn");
 const buyCartBtn = document.querySelector(".buyCart-btn");
+const buyCartHiddenMessage = document.querySelector(".buyCartHiddenMessage");
+const audioMagic = document.querySelector("#audioMagic");
 
 function renderResults(productsToShow) {
   console.log("Renderizando productos:", productsToShow);
@@ -132,7 +134,8 @@ function handleDecreaseQuantity(event) {
   const productInCart = cart.find((item) => item.id === clickedId);
   if (productInCart) {
     productInCart.quantity--;
-    if (productInCart.quantity <= 0) cart = cart.filter(item => item.id !== clickedId);
+    if (productInCart.quantity <= 0)
+      cart = cart.filter((item) => item.id !== clickedId);
   }
   localStorage.setItem("cart", JSON.stringify(cart));
   renderResults(products);
@@ -154,6 +157,18 @@ function handleClearCart() {
   renderCart();
 }
 
+function handleBuyCart() {
+  buyCartHiddenMessage.classList.add("active");
+
+  const modal = buyCartHiddenMessage.querySelector(".modal-content");
+  modal.style.animation = "none";
+  void modal.offsetWidth; // forzar reflow
+  modal.style.animation = null;
+
+  audioMagic.currentTime = 0;
+  audioMagic.play();
+}
+
 function getData() {
   fetch("https://fakestoreapi.com/products")
     .then((response) => response.json())
@@ -164,7 +179,9 @@ function getData() {
     })
     .catch((error) => {
       console.error("Error con la API principal, usando la de backup", error);
-      fetch("https://raw.githubusercontent.com/Adalab/resources/master/apis/products.json")
+      fetch(
+        "https://raw.githubusercontent.com/Adalab/resources/master/apis/products.json"
+      )
         .then((response) => response.json())
         .then((data) => {
           products = data;
@@ -179,8 +196,12 @@ clearCartBtn.addEventListener("click", handleClearCart);
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const searchValue = inputSearch.value.toLowerCase();
-  const filteredProducts = products.filter(product => product.title.toLowerCase().includes(searchValue));
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchValue)
+  );
   renderResults(filteredProducts);
 });
+
+buyCartBtn.addEventListener("click", handleBuyCart);
 
 getData();

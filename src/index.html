@@ -28,20 +28,32 @@
       </form>
     </header>
     <main class="main">
-        <div>
+      <div>
         <h2>Tu cesta</h2>
-      <section class="cart-container">
-        <ul class="cart-list"></ul>
-        <p class="cart-total"></p>
-        <button class="clearCart-btn hidden">Vacíar cesta</button>
-        <button class="buyCart-btn hidden">Realizar compra</button>
-      </section>
+        <section class="cart-container">
+          <ul class="cart-list"></ul>
+          <p class="cart-total"></p>
+          <button class="clearCart-btn hidden">Vacíar cesta</button>
+          <button class="buyCart-btn hidden">Realizar compra</button>
+        </section>
       </div>
       <section class="products-container">
         <h2>Lo más vendidos</h2>
         <ul class="products-list"></ul>
       </section>
     </main>
+    <div class="buyCartHiddenMessage">
+      <div class="modal-content">
+        <img
+          src="./images/magicWord.gif"
+          alt="Dennis Nedry riendo"
+          class="message-img"
+        />
+        <p>Ah, ah, ah... ¡no has dicho la palabra mágica!</p>
+        <audio id="audioMagic" src="./images/magicWordAudio.mp3"></audio>
+      </div>
+    </div>
+
     <script src="./js/main.js"></script>
   </body>
 </html>

@@ -222,3 +222,40 @@ h2 {
 .hidden {
   display: none;
 }
+
+.buyCartHiddenMessage {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.buyCartHiddenMessage.active {
+  display: flex; 
+}
+
+.buyCartHiddenMessage .message-img {
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.buyCartHiddenMessage p {
+  color: #383838;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.buyCartHiddenMessage .modal-content {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  animation: shake 0.5s;
+}
